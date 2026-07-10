@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowFix Plumbing | Premium Plumbing Services</title>
+    <meta name="description" content="Professional plumbing services for residential and commercial needs. 24/7 emergency support.">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS (via CDN for rapid styling) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0D6EFD',
+                        secondary: '#00B4D8',
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Overrides */
+        :root {
+            --primary: #0D6EFD;
+            --secondary: #00B4D8;
+            --dark: #1E293B;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #ffffff;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .dark #loader {
+            background: #1E293B;
+        }
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Parallax */
+        .hero-bg {
+            background-image: linear-gradient(rgba(30, 41, 59, 0.7), rgba(30, 41, 59, 0.7)), url('https://images.unsplash.com/photo-1585704032915-c3400af94449?q=80&w=1920&auto=format&fit=crop');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0b5ed7; }
+
+        /* Service Card Hover */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Pricing Card Highlight */
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Gallery Overlay */
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Testimonial Slider */
+        .testimonial-slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .testimonial-slide.active {
+            display: block;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 200px; /* Approximate max height */
+        }
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Floating Buttons */
+        .fab {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: transform 0.2s;
+        }
+        .fab:hover { transform: scale(1.1); }
+
+        /* Dark Mode Transitions */
+        body, .bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-900 {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="text-center">
+            <div class="loader-spinner mx-auto mb-4"></div>
+            <h2 class="text-2xl font-bold text-primary">FlowFix</h2>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Loading Premium Experience...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-faucet-drip text-3xl text-primary"></i>
+                    <span class="font-bold text-2xl tracking-tight text-dark dark:text-white">Flow<span class="text-primary">Fix</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">Home</a>
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">About</a>
+                    <a href="#services" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">Services</a>
+                    <a href="#pricing" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">Pricing</a>
+                    <a href="#gallery" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">Projects</a>
+                    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium transition">Contact</a>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition text-gray-600 dark:text-yellow-400">
+                        <i class="fas fa-moon text-xl dark:hidden"></i>
+                        <i class="fas fa-sun text-xl hidden dark:block"></i>
+                    </button>
+
+                    <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-6 py-2.5 rounded-full font-medium transition shadow-lg shadow-blue-500/30">
+                        Get a Quote
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center gap-4">
+                    <button id="theme-toggle-mobile" class="p-2 text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-moon text-xl dark:hidden"></i>
+                        <i class="fas fa-sun text-xl hidden dark:block"></i>
+                    </button>
+                    <button id="mobile-menu-btn" class="text-gray-600 dark:text-white hover:text-primary focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-lg">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800">About</a>
+                <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800">Services</a>
+                <a href="#pricing" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800">Pricing</a>
+                <a href="#contact" class="block px-3 py-2 mt-4 text-center rounded-md text-base font-medium bg-primary text-white hover:bg-blue-700">Get a Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg h-screen flex items-center justify-center relative">
+        <div class="text-center px-4 max-w-4xl mx-auto reveal active">
+            <div class="inline-block px-4 py-1 mb-4 rounded-full bg-blue-500/20 border border-blue-400/30 backdrop-blur-sm text-white text-sm font-semibold tracking-wide uppercase">
+                24/7 Emergency Services
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
+                Expert Plumbing <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Solutions You Can Trust</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                From leaky faucets to full pipe installations, our certified professionals deliver quality workmanship with a smile. Your comfort is our priority.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="px-8 py-4 bg-primary hover:bg-blue-700 text-white rounded-full font-bold text-lg transition shadow-lg shadow-blue-600/40 flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Service
+                </a>
+                <a href="tel:+1234567890" class="px-8 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white rounded-full font-bold text-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-phone-alt"></i> (123) 456-7890
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/70">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1621905251189-08b45d6e69b2?q=80&w=1000&auto=format&fit=crop" alt="Plumber at work" class="rounded-2xl shadow-2xl w-full object-cover h-[500px]">
+                        <div class="absolute -bottom-6 -right-6 bg-white dark:bg-gray-900 p-6 rounded-xl shadow-xl hidden md:block">
+                            <div class="flex items-center gap-4">
+                                <div class="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full text-primary">
+                                    <i class="fas fa-award text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-3xl font-bold text-dark dark:text-white">15+</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Years Experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <h4 class="text-primary font-bold uppercase tracking-wider mb-2">About Us</h4>
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white mb-6">We Are The Leading Plumbing Experts in The City</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        Founded in 2008, FlowFix has grown from a small family business to a leading plumbing service provider. We combine old-fashioned customer service with modern technology to solve your plumbing problems efficiently.
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-200">
+                            <i class="fas fa-check-circle text-primary"></i> Licensed & Insured Technicians
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-200">
+                            <i class="fas fa-check-circle text-primary"></i> Upfront, Flat-Rate Pricing
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-200">
+                            <i class="fas fa-check-circle text-primary"></i> 100% Satisfaction Guaranteed
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700 dark:text-gray-200">
+                            <i class="fas fa-check-circle text-primary"></i> Eco-Friendly Solutions
+                        </li>
+                    </ul>
+                    <a href="#contact" class="inline-flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                        Learn More About Us <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-primary font-bold uppercase tracking-wider mb-2">Our Services</h4>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">Comprehensive Plumbing Solutions</h2>
+                <p class="text-gray-600 dark:text-gray-400">We offer a wide range of services to meet all your residential and commercial plumbing needs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Emergency Plumbing</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Available 24/7 for burst pipes, severe leaks, and urgent repairs. We arrive fast and fix it right.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-tint text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Leak Repair</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Expert detection and repair of hidden leaks to prevent water damage and save you money.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-water text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Drain Cleaning</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Clear stubborn clogs and blockages with our advanced hydro-jetting and snaking techniques.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-wrench text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Pipe Installation</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">New construction or repiping? We install durable, high-quality piping systems built to last.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-fire text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Water Heater Repair</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Installation and repair of tank and tankless water heaters. Never take a cold shower again.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-bath text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Bathroom Plumbing</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Full bathroom renovations, fixture installations, and toilet repairs handled with care.</p>
+                </div>
+                
+                <!-- Service 7 -->
+                <div class="service-card bg-gray-50 dark:bg-gray-800 p-8 rounded-2xl reveal group md:col-span-2 lg:col-span-1">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i class="fas fa-sink text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-3">Kitchen Plumbing</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Garbage disposal fixes, dishwasher hookups, and faucet replacements to keep your kitchen flowing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-20 bg-dark text-white relative overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-primary rounded-full filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary rounded-full filter blur-3xl opacity-20 translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <h4 class="text-secondary font-bold uppercase tracking-wider mb-2">Why Choose Us</h4>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">The FlowFix Difference</h2>
+                    <p class="text-gray-300 mb-8">We don't just fix pipes; we build relationships based on trust, transparency, and top-tier craftsmanship.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">On-Time Service</h4>
+                                <p class="text-gray-400 text-sm">We respect your time. Our technicians arrive promptly within the scheduled window.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary">
+                                <i class="fas fa-shield-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">Trusted Professionals</h4>
+                                <p class="text-gray-400 text-sm">Background-checked, licensed, and continuously trained experts.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-secondary">
+                                <i class="fas fa-tags text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold mb-1">Fair Pricing</h4>
+                                <p class="text-gray-400 text-sm">No hidden fees. We provide clear, upfront quotes before any work begins.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400af94449?q=80&w=1000&auto=format&fit=crop" alt="Plumber tools" class="rounded-2xl shadow-2xl border-4 border-white/10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-16 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="2500">0</div>
+                    <div class="text-blue-100 text-sm uppercase tracking-wide">Jobs Completed</div>
+                </div>
+                <div class="reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="15">0</div>
+                    <div class="text-blue-100 text-sm uppercase tracking-wide">Years Experience</div>
+                </div>
+                <div class="reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="35">0</div>
+                    <div class="text-blue-100 text-sm uppercase tracking-wide">Expert Plumbers</div>
+                </div>
+                <div class="reveal">
+                    <div class="text-4xl md:text-5xl font-bold mb-2 counter" data-target="99">0</div>
+                    <div class="text-blue-100 text-sm uppercase tracking-wide">% Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section id="pricing" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-primary font-bold uppercase tracking-wider mb-2">Pricing</h4>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">Transparent Pricing Plans</h2>
+                <p class="text-gray-600 dark:text-gray-400">Choose the plan that fits your needs. No hidden costs, ever.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <!-- Basic -->
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg reveal border border-gray-100 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-2">Basic Repair</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">$85<span class="text-lg text-gray-400 font-normal">/visit</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Diagnostic Fee Included</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 1 Hour of Labor</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Minor Leak Fixes</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-times text-red-400"></i> Parts Not Included</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition">Select Plan</button>
+                </div>
+
+                <!-- Standard -->
+                <div class="pricing-card popular bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-xl reveal relative">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-primary to-secondary text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
+                        Most Popular
+                    </div>
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-2">Standard Maintenance</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">$150<span class="text-lg text-gray-400 font-normal">/visit</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Full System Inspection</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Drain Cleaning</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Fixture Check</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Water Pressure Test</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl bg-primary text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">Select Plan</button>
+                </div>
+
+                <!-- Premium -->
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg reveal border border-gray-100 dark:border-gray-700">
+                    <h3 class="text-xl font-bold text-dark dark:text-white mb-2">Premium Install</h3>
+                    <div class="text-4xl font-bold text-primary mb-6">Custom<span class="text-lg text-gray-400 font-normal">/quote</span></div>
+                    <ul class="space-y-3 mb-8 text-gray-600 dark:text-gray-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Full Installation</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Premium Parts</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 5-Year Warranty</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Priority Scheduling</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition">Contact Us</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Gallery -->
+    <section id="gallery" class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h4 class="text-primary font-bold uppercase tracking-wider mb-2">Portfolio</h4>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white mb-4">Recent Projects</h2>
+                <p class="text-gray-600 dark:text-gray-400">Take a look at some of our finest work.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400af94449?q=80&w=600&auto=format&fit=crop" alt="Project 1" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Pipe Replacement</h4>
+                            <p class="text-sm">Residential</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop" alt="Project 2" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Kitchen Renovation</h4>
+                            <p class="text-sm">Commercial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1632582593350-65c17725541f?q=80&w=600&auto=format&fit=crop" alt="Project 3" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Bathroom Install</h4>
+                            <p class="text-sm">Residential</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop" alt="Project 4" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Water Heater Fix</h4>
+                            <p class="text-sm">Emergency</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=600&auto=format&fit=crop" alt="Project 5" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Leak Detection</h4>
+                            <p class="text-sm">Industrial</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item relative group overflow-hidden rounded-xl h-64 reveal cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=600&auto=format&fit=crop" alt="Project 6" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    <div class="gallery-overlay absolute inset-0 bg-primary/80 opacity-0 transition duration-300 flex items-center justify-center">
+                        <div class="text-white text-center">
+                            <h4 class="text-xl font-bold">Smart Fixtures</h4>
+                            <p class="text-sm">Modern Home</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h4 class="text-primary font-bold uppercase tracking-wider mb-2">Testimonials</h4>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white">What Our Clients Say</h2>
+            </div>
+
+            <div class="relative bg-white dark:bg-gray-900 p-8 md:p-12 rounded-2xl shadow-xl reveal">
+                <div class="absolute top-8 left-8 text-6xl text-primary opacity-20">"</div>
+                
+                <!-- Slider Container -->
+                <div id="testimonial-container" class="relative z-10 min-h-[200px]">
+                    <!-- Slide 1 -->
+                    <div class="testimonial-slide active text-center">
+                        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 italic mb-6">"FlowFix saved us during a major leak in the middle of the night. They arrived within 30 minutes and fixed the issue professionally. Highly recommended!"</p>
+                        <div class="flex items-center justify-center gap-4">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah J." class="w-12 h-12 rounded-full object-cover">
+                            <div class="text-left">
+                                <h5 class="font-bold text-dark dark:text-white">Sarah Jenkins</h5>
+                                <p class="text-xs text-gray-500">Homeowner</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="testimonial-slide text-center">
+                        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 italic mb-6">"The team was incredibly professional. They installed a new water heater and cleaned up perfectly afterward. Great pricing too!"</p>
+                        <div class="flex items-center justify-center gap-4">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike T." class="w-12 h-12 rounded-full object-cover">
+                            <div class="text-left">
+                                <h5 class="font-bold text-dark dark:text-white">Mike Thompson</h5>
+                                <p class="text-xs text-gray-500">Restaurant Owner</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="testimonial-slide text-center">
+                        <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 italic mb-6">"I've used FlowFix for all my rental properties. They are reliable, honest, and do quality work every single time."</p>
+                        <div class="flex items-center justify-center gap-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Elena R." class="w-12 h-12 rounded-full object-cover">
+                            <div class="text-left">
+                                <h5 class="font-bold text-dark dark:text-white">Elena Rodriguez</h5>
+                                <p class="text-xs text-gray-500">Property Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex justify-center gap-4 mt-8">
+                    <button onclick="changeSlide(-1)" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="changeSlide(1)" class="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="py-20 bg-white dark:bg-gray-900">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h4 class="text-primary font-bold uppercase tracking-wider mb-2">FAQ</h4>
+                <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white">Common Questions</h2>
+            </div>
+
+            <div class="space-y-4 reveal">
+                <!-- Item 1 -->
+                <div class="accordion-item border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition" onclick="toggleAccordion(this)">
+                        <span class="font-semibold text-dark dark:text-white">Do you offer emergency services?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content bg-white dark:bg-gray-900">
+                        <div class="p-6 text-gray-600 dark:text-gray-300 text-sm">
+                            Yes! We offer 24/7 emergency plumbing services. Our team is always on standby to handle burst pipes, severe leaks, and any urgent plumbing issues.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="accordion-item border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition" onclick="toggleAccordion(this)">
+                        <span class="font-semibold text-dark dark:text-white">Are your plumbers licensed and insured?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content bg-white dark:bg-gray-900">
+                        <div class="p-6 text-gray-600 dark:text-gray-300 text-sm">
+                            Absolutely. All our technicians are fully licensed, insured, and background-checked for your safety and peace of mind.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="accordion-item border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition" onclick="toggleAccordion(this)">
+                        <span class="font-semibold text-dark dark:text-white">What are your service charges?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content bg-white dark:bg-gray-900">
+                        <div class="p-6 text-gray-600 dark:text-gray-300 text-sm">
+                            We provide upfront, flat-rate pricing. We charge by the job, not by the hour, so you know exactly what to expect before we start working.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="accordion-item border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition" onclick="toggleAccordion(this)">
+                        <span class="font-semibold text-dark dark:text-white">Do you offer warranties?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300 accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content bg-white dark:bg-gray-900">
+                        <div class="p-6 text-gray-600 dark:text-gray-300 text-sm">
+                            Yes, we stand by our work. We offer a 100% satisfaction guarantee and warranties on parts and labor depending on the service provided.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div class="reveal">
+                    <h4 class="text-primary font-bold uppercase tracking-wider mb-2">Contact Us</h4>
+                    <h2 class="text-3xl md:text-4xl font-bold text-dark dark:text-white mb-6">Get In Touch</h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-8">Have a plumbing issue or need a quote? Fill out the form or contact us directly. We're here to help!</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-dark dark:text-white">Address</h5>
+                                <p class="text-gray-600 dark:text-gray-400">123 Pipe Street, Flow City, FC 90210</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-dark dark:text-white">Phone</h5>
+                                <p class="text-gray-600 dark:text-gray-400">(123) 456-7890</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-dark dark:text-white">Email</h5>
+                                <p class="text-gray-600 dark:text-gray-400">hello@flowfix.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div class="mt-10 p-6 bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <h4 class="font-bold text-dark dark:text-white mb-4 flex items-center gap-2">
+                            <i class="far fa-clock text-primary"></i> Business Hours
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                            <li class="flex justify-between"><span>Mon - Fri:</span> <span class="font-semibold">8:00 AM - 8:00 PM</span></li>
+                            <li class="flex justify-between"><span>Saturday:</span> <span class="font-semibold">9:00 AM - 5:00 PM</span></li>
+                            <li class="flex justify-between"><span>Sunday:</span> <span class="font-semibold text-primary">Emergency Only</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg reveal border border-gray-100 dark:border-gray-700">
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition dark:text-white" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition dark:text-white" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition dark:text-white" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Service Needed</label>
+                            <select class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition dark:text-white">
+                                <option>General Repair</option>
+                                <option>Emergency Service</option>
+                                <option>Installation</option>
+                                <option>Inspection</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                            <textarea required rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition dark:text-white" placeholder="Describe your issue..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-primary hover:bg-blue-700 text-white font-bold rounded-lg transition shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <!-- Success Message (Hidden by default) -->
+                    <div id="formSuccess" class="hidden mt-4 p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg text-center">
+                        <i class="fas fa-check-circle text-2xl mb-2"></i>
+                        <p class="font-bold">Message Sent!</p>
+                        <p class="text-sm">We'll get back to you shortly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Maps -->
+    <div class="w-full h-96 bg-gray-200 dark:bg-gray-800 relative">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.217676750666!2d-73.98784408459418!3d40.75797467932688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy"
+            class="grayscale hover:grayscale-0 transition duration-500"
+            title="FlowFix Location">
+        </iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-faucet-drip text-3xl text-primary"></i>
+                        <span class="font-bold text-2xl tracking-tight">Flow<span class="text-primary">Fix</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Your trusted partner for all plumbing needs. Quality, reliability, and transparency in every drop.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-primary transition">About Us</a></li>
+                        <li><a href="#services" class="hover:text-primary transition">Services</a></li>
+                        <li><a href="#pricing" class="hover:text-primary transition">Pricing</a></li>
+                        <li><a href="#contact" class="hover:text-primary transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Services</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-primary transition">Leak Repair</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Drain Cleaning</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Water Heater</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Pipe Installation</a></li>
+                        <li><a href="#" class="hover:text-primary transition">Emergency Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 text-sm mb-4">Subscribe for plumbing tips and exclusive offers.</p>
+                    <form class="flex gap-2" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 border border-gray-700 text-white px-4 py-2 rounded-lg w-full focus:outline-none focus:border-primary text-sm">
+                        <button type="submit" class="bg-primary hover:bg-blue-700 px-4 py-2 rounded-lg transition">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm"> FlowFix Plumbing. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/1234567890" target="_blank" class="fab fixed bottom-24 right-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 hover:bg-green-600">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="tel:+1234567890" class="fab fixed bottom-6 right-6 bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl z-40 animate-pulse-slow hover:bg-blue-700">
+        <i class="fas fa-phone-alt"></i>
+    </a>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 left-6 bg-gray-800 dark:bg-gray-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-40 transition-all duration-300 translate-y-20 opacity-0 hover:bg-primary">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // 1. Loading Screen
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 500);
+        });
+
+        // 2. Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        // Close mobile menu on link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
+
+        // 3. Dark/Light Mode Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+
+        function toggleTheme() {
+            htmlElement.classList.toggle('dark');
+            // Optional: Save preference to localStorage (if allowed, though single file usually avoids storage for simplicity, but good for UX)
+            // For this single file requirement, we keep it session-based or simple toggle
+        }
+        themeToggleBtn.addEventListener('click', toggleTheme);
+        themeToggleMobileBtn.addEventListener('click', toggleTheme);
+
+        // 4. Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // 5. Sticky Navbar Style on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // 6. Animated Counters
+        const counters = document.querySelectorAll('.counter');
+        let hasCounted = false;
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !hasCounted) {
+                hasCounted = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const increment = target / 50; // Speed
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current) + (target > 100 ? '+' : '');
+                            setTimeout(updateCounter, 30);
+                        } else {
+                            counter.innerText = target + (target > 100 ? '+' : '');
+                        }
+                    };
+                    updateCounter();
+                });
+            }
+        }, { threshold: 0.5 });
+        if(counters.length > 0) counterObserver.observe(counters[0].parentElement.parentElement); // Observe the section
+
+        // 7. Testimonial Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        function changeSlide(direction) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        // Auto play slider
+        setInterval(() => changeSlide(1), 5000);
+
+        // 8. FAQ Accordion
+        function toggleAccordion(button) {
+            const item = button.parentElement;
+            const isActive = item.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.accordion-item').forEach(acc => {
+                acc.classList.remove('active');
+            });
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        }
+
+        // 9. Contact Form Validation & Handling
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contactForm');
+            const successMsg = document.getElementById('formSuccess');
+            const btn = form.querySelector('button');
+            const originalBtnText = btn.innerHTML;
+
+            // Basic validation check (HTML5 'required' handles most, this is for UX)
+            let isValid = true;
+            form.querySelectorAll('input, textarea').forEach(input => {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    input.classList.add('border-red-500');
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+
+            if (isValid) {
+                // Simulate sending
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                setTimeout(() => {
+                    form.reset();
+                    form.style.display = 'none';
+                    successMsg.classList.remove('hidden');
+                    successMsg.classList.add('animate-fade-in-up');
+                }, 1500);
+            }
+        }
+
+        // 10. Scroll to Top Button Visibility
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('translate-y-20', 'opacity-0');
+            } else {
+                scrollTopBtn.classList.add('translate-y-20', 'opacity-0');
+            }
+        });
+
+    </script>
+</body>
+</html>
